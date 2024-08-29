@@ -19,7 +19,7 @@ const nextConfig = {
     return [
       {
         // matching all admin routes
-        source: "/admin/(.*)",
+        source: "/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Credentials", value: "true" },
