@@ -15,6 +15,17 @@ const nextConfig = {
         },
       ],
   },
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/admin/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+        ]
+      }
+    ]
+  }
 };
 
 export default nextConfig;
