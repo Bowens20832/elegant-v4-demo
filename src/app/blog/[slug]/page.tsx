@@ -1,7 +1,7 @@
 import NotFound from "@/app/not-found";
 import Header from "@/components/Header";
 import NewsletterForm from "@/components/NewsletterForm";
-import { getPageViews, getPublishedPostBySlug, incrementPageViews } from "@/utils/Db/Actions/Post";
+import { getAllPublishedPostsForCollection, getPageViews, getPublishedPostBySlug, incrementPageViews } from "@/utils/Db/Actions/Post";
 import MetaTitle from "@/utils/Meta/MetaTitle";
 import moment from "moment";
 import { Metadata, ResolvingMetadata } from "next";
@@ -9,18 +9,27 @@ import Link from "next/link";
 import { Suspense } from "react";
 import "@/components/Editor/css/editor.css";
 import MarkdownToHtml from "@/utils/Rehype/MarkdownToHtml";
+import Image from "next/image";
 
 async function getPost(slug: string) {
     return await getPublishedPostBySlug(slug, 'posts');
 }
 
 async function getViews(slug: string) {
-    const pageViews = await getPageViews(slug);
-
-    await incrementPageViews(slug);
+    const pageViews = await incrementPageViews(slug);
 
     return pageViews?.count || 0;
 }
+
+// export async function generateStaticParams() {
+//     const posts =  await getAllPublishedPostsForCollection('posts') || [];
+
+//     const slugs = posts.map((post) => {
+//         return post.slug
+//     });
+
+//     return slugs;
+// }
 
 export async function generateMetadata(
     { params }: { params: { slug: string } },
@@ -172,9 +181,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                                              key={author.id}
                                              className="flex items-center font-medium whitespace-nowrap px-5 mt-6"
                                             >
-                                                <img
-                                                    src={author?.image || ""}
-                                                    alt=""
+                                                <Image
+                                                    src={author.image || ""}
+                                                    width={100}
+                                                    height={100}
+                                                    alt={`${author.name} profile picture.`}
                                                     className="mr-3 w-9 h-9 rounded-full bg-slate-50 dark:bg-slate-800"
                                                     decoding="async"
                                                 />
