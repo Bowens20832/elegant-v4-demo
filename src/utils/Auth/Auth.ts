@@ -4,8 +4,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { z, string } from 'zod';
 import { comparePasswords } from './Bcrypt';
 import { getUser } from '../Db/Actions/User';
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/utils/Db/Prisma";
-import { PrismaAdapter } from "@auth/prisma-adapter"
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 

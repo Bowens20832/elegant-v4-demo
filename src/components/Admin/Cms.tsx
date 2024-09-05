@@ -3,7 +3,7 @@ import CmsClient from './CmsClient';
 import { getAllCollections } from '@/utils/Db/Actions/Collection';
 import { R2Config } from '../Types';
 import { getAdminCount } from '@/utils/Db/Actions/User';
-import { getSession } from 'next-auth/react';
+import { auth } from '@/utils/Auth/Auth';
  
 interface Props {
     /**
@@ -30,9 +30,7 @@ export default async function CMS({
     r2Config,
     params 
 }: Props) {
-    const session = await getSession();
-
-    console.log(session)
+    const session = await auth();
 
     const adminCount = (
         process.env.POSTGRES_PRISMA_URL && process.env.POSTGRES_PRISMA_URL.length > 0 ? 
