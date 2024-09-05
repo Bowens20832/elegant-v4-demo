@@ -32,6 +32,8 @@ export default async function CMS({
 }: Props) {
     const session = await getSession();
 
+    console.log(session)
+
     const adminCount = (
         process.env.POSTGRES_PRISMA_URL && process.env.POSTGRES_PRISMA_URL.length > 0 ? 
         await getAdminCount() :
