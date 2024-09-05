@@ -1,9 +1,9 @@
 import React from 'react';
 import CmsClient from './CmsClient';
-import { getSession } from '@/utils/Auth/Auth';
 import { getAllCollections } from '@/utils/Db/Actions/Collection';
 import { R2Config } from '../Types';
 import { getAdminCount } from '@/utils/Db/Actions/User';
+import { getSession } from 'next-auth/react';
  
 interface Props {
     /**
