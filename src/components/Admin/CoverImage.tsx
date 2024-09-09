@@ -249,8 +249,8 @@ async function saveCoverImage({
             body: file,
             headers: {
                 "Content-Type": file.type,
-            },
-            mode: "no-cors"
+                "Access-Control-Allow-Origin": "*"
+            }
         });
 
         return `${publicUrl}/${filename}`;
