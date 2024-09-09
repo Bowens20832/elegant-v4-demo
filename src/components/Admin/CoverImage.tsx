@@ -249,7 +249,8 @@ async function saveCoverImage({
             body: file,
             headers: {
                 "Content-Type": file.type,
-                "Access-Control-Allow-Origin": "*"
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
             }
         });
 
