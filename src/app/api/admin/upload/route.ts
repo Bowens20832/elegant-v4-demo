@@ -4,19 +4,7 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 
-export const runtime = "edge";
-
 export async function POST(req: Request) {
-    const session = await auth();
-    if (!session?.user?.id) {
-        return new Response(
-            "Not authenticated.",
-            {
-            status: 403,
-            },
-        );
-    }
-
     const file = req.body || "";
     const contentType = req.headers.get("content-type") || "text/plain";
     const filename = `${uuidv4()}.${contentType.split("/")[1]}`;
